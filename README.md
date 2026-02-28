@@ -45,4 +45,3 @@ You need [Node.js](https://nodejs.org/) installed on your local machine.
 Vidyanta Tech
 Phone: +91 79 7212 3806
 Email: hello@vidyantatech.com
-"# Vidyanta" 
