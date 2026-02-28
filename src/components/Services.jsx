@@ -162,7 +162,7 @@ function FullCard({ service, index }) {
                             flexShrink: 0,
                         }}
                     >
-                        <Icon size={22} color={service.textColor === '#fff' ? '#1C1814' : '#fff'} />
+                        <Icon size={22} color={service.accent === '#FFD23F' ? '#1C1814' : '#fff'} />
                     </div>
                 </div>
 
@@ -202,7 +202,7 @@ function FullCard({ service, index }) {
                             alignItems: 'center',
                             gap: '10px',
                             background: service.accent,
-                            color: service.textColor === '#fff' ? '#1C1814' : '#fff',
+                            color: service.accent === '#FFD23F' ? '#1C1814' : '#fff',
                             padding: '14px 28px',
                             borderRadius: '14px',
                             fontWeight: 700,
