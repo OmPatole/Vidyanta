@@ -1,33 +1,31 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
-// Placeholder company logos as styled text badges (grayscale → color on hover)
 const clients = [
-    { name: 'TechNova', color: '#6366F1' },
-    { name: 'BrightMedia', color: '#F59E0B' },
-    { name: 'PixelCraft', color: '#EC4899' },
-    { name: 'SkyBridge', color: '#14B8A6' },
-    { name: 'CloudFlux', color: '#2563EB' },
-    { name: 'NexGen', color: '#8B5CF6' },
-    { name: 'Alphaworks', color: '#EF4444' },
-    { name: 'Zephyr Inc.', color: '#F97316' },
-    { name: 'OmniSoft', color: '#10B981' },
-    { name: 'DataSync', color: '#06B6D4' },
-    { name: 'BuildFast', color: '#84CC16' },
-    { name: 'Vertexia', color: '#E11D48' },
-    { name: 'Snaplogic', color: '#7C3AED' },
-    { name: 'CorePath', color: '#2DD4BF' },
+    { name: 'TechNova', bg: '#5B4FE9', dark: false },
+    { name: 'BrightMedia', bg: '#FFD23F', dark: true },
+    { name: 'PixelCraft', bg: '#FF3D57', dark: false },
+    { name: 'SkyBridge', bg: '#00C896', dark: true },
+    { name: 'CloudFlux', bg: '#5B4FE9', dark: false },
+    { name: 'NexGen', bg: '#1C1814', dark: false },
+    { name: 'Alphaworks', bg: '#FF3D57', dark: false },
+    { name: 'Zephyr Inc.', bg: '#FFD23F', dark: true },
+    { name: 'OmniSoft', bg: '#00C896', dark: true },
+    { name: 'DataSync', bg: '#5B4FE9', dark: false },
+    { name: 'BuildFast', bg: '#1C1814', dark: false },
+    { name: 'Vertexia', bg: '#FF3D57', dark: false },
+    { name: 'Snaplogic', bg: '#5B4FE9', dark: false },
+    { name: 'CorePath', bg: '#00C896', dark: true },
 ];
 
 function ClientLogo({ client }) {
     return (
         <div
-            className="flex-shrink-0 h-14 px-6 border border-white/5 rounded-md bg-surface flex items-center justify-center mx-3 group cursor-default transition-all duration-300 hover:border-white/20 hover:bg-surface-2"
+            style={{ flexShrink: 0, height: 'clamp(44px, 6vw, 56px)', padding: '0 clamp(16px, 3vw, 28px)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 6px', cursor: 'default', background: client.bg, transition: 'transform 0.2s' }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.06)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         >
-            <span
-                className="text-sm font-bold tracking-tight text-white/30 group-hover:text-white transition-colors duration-400 whitespace-nowrap"
-                style={{ '--hover-color': client.color }}
-            >
+            <span style={{ fontSize: 'clamp(12px, 1.2vw, 14px)', fontWeight: 700, letterSpacing: '-0.01em', whiteSpace: 'nowrap', color: client.dark ? '#1C1814' : '#fff' }}>
                 {client.name}
             </span>
         </div>
@@ -37,55 +35,39 @@ function ClientLogo({ client }) {
 export default function Clients() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-60px' });
-
-    // Duplicate for seamless infinite scroll
     const doubled = [...clients, ...clients];
 
     return (
-        <section id="clients" className="py-28 bg-[#0A0A0A] overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 mb-14" ref={ref}>
+        <section id="clients" style={{ background: '#F5F0E8', padding: 'clamp(56px, 8vw, 112px) 0', overflow: 'hidden' }}>
+            <div ref={ref} style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(20px, 6vw, 48px)', marginBottom: 'clamp(40px, 5vw, 56px)' }}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.7 }}
-                    className="text-center"
+                    style={{ textAlign: 'center' }}
                 >
                     <span className="section-label">Our Clients</span>
-                    <h2 className="section-title">
-                        Brands We <span className="text-primary">Love</span> Working For
+                    <h2 className="section-title" style={{ marginTop: '12px' }}>
+                        Brands We{' '}
+                        <span style={{ background: '#FF3D57', color: '#fff', padding: '2px clamp(12px, 2vw, 20px)', borderRadius: 'clamp(10px, 1.5vw, 16px)', display: 'inline-block' }}>
+                            Love
+                        </span>{' '}
+                        Working For
                     </h2>
                 </motion.div>
             </div>
 
-            {/* Marquee wrapper */}
-            <div className="relative">
-                {/* Fade masks */}
-                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-
-                <div className="flex overflow-hidden">
-                    <div className="marquee-track flex items-center">
-                        {doubled.map((client, i) => (
-                            <ClientLogo key={`${client.name}-${i}`} client={client} />
-                        ))}
-                    </div>
+            {/* Row 1 */}
+            <div style={{ display: 'flex', overflow: 'hidden', marginBottom: '10px' }}>
+                <div className="marquee-track" style={{ display: 'flex', alignItems: 'center' }}>
+                    {doubled.map((c, i) => <ClientLogo key={`${c.name}-${i}`} client={c} />)}
                 </div>
             </div>
 
-            {/* Second row - reverse direction */}
-            <div className="relative mt-4">
-                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-
-                <div className="flex overflow-hidden">
-                    <div
-                        className="flex items-center"
-                        style={{ animation: 'marquee 25s linear infinite reverse', willChange: 'transform' }}
-                    >
-                        {doubled.map((client, i) => (
-                            <ClientLogo key={`rev-${client.name}-${i}`} client={client} />
-                        ))}
-                    </div>
+            {/* Row 2 reverse */}
+            <div style={{ display: 'flex', overflow: 'hidden' }}>
+                <div style={{ display: 'flex', alignItems: 'center', animation: 'marquee 25s linear infinite reverse', willChange: 'transform' }}>
+                    {doubled.map((c, i) => <ClientLogo key={`rev-${c.name}-${i}`} client={c} />)}
                 </div>
             </div>
         </section>

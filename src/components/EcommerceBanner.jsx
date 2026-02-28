@@ -2,51 +2,13 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-// Payment method SVG icons (inline)
 const PaymentIcons = () => (
-    <div className="flex flex-wrap items-center gap-4">
-        {/* Google Pay */}
-        <div className="h-9 px-3 bg-white/10 border border-white/10 rounded-md flex items-center justify-center hover:bg-white/15 transition-colors">
-            <svg height="24" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="12" fill="white" fontSize="10" fontWeight="700" fontFamily="Inter, sans-serif">G Pay</text>
-            </svg>
-        </div>
-
-        {/* PayPal */}
-        <div className="h-9 px-3 bg-white/10 border border-white/10 rounded-md flex items-center justify-center hover:bg-white/15 transition-colors">
-            <svg height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="15" fill="#00B2E3" fontSize="12" fontWeight="800" fontFamily="Inter, sans-serif">Pay</text>
-                <text x="28" y="15" fill="#002C8A" fontSize="12" fontWeight="800" fontFamily="Inter, sans-serif">Pal</text>
-            </svg>
-        </div>
-
-        {/* Stripe */}
-        <div className="h-9 px-3 bg-white/10 border border-white/10 rounded-md flex items-center justify-center hover:bg-white/15 transition-colors">
-            <svg height="20" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="15" fill="#635BFF" fontSize="13" fontWeight="800" fontFamily="Inter, sans-serif">stripe</text>
-            </svg>
-        </div>
-
-        {/* Apple Pay */}
-        <div className="h-9 px-3 bg-white/10 border border-white/10 rounded-md flex items-center justify-center hover:bg-white/15 transition-colors">
-            <svg height="20" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="15" fill="white" fontSize="11" fontWeight="700" fontFamily="Inter, sans-serif"> Pay</text>
-            </svg>
-        </div>
-
-        {/* Visa */}
-        <div className="h-9 px-3 bg-white/10 border border-white/10 rounded-md flex items-center justify-center hover:bg-white/15 transition-colors">
-            <svg height="20" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="15" fill="#1A1F71" fontSize="14" fontWeight="900" fontFamily="Georgia, serif" letterSpacing="1">VISA</text>
-            </svg>
-        </div>
-
-        {/* Razorpay */}
-        <div className="h-9 px-3 bg-white/10 border border-white/10 rounded-md flex items-center justify-center hover:bg-white/15 transition-colors">
-            <svg height="20" viewBox="0 0 70 20" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="15" fill="#2D9EE0" fontSize="11" fontWeight="700" fontFamily="Inter, sans-serif">Razorpay</text>
-            </svg>
-        </div>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+        {['G Pay', 'PayPal', 'Stripe', 'Apple Pay', 'VISA', 'Razorpay'].map((name) => (
+            <div key={name} style={{ height: '36px', padding: '0 14px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '12px', letterSpacing: '0.03em', background: 'rgba(255,255,255,0.18)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>
+                {name}
+            </div>
+        ))}
     </div>
 );
 
@@ -55,74 +17,67 @@ export default function EcommerceBanner() {
     const isInView = useInView(ref, { once: true, margin: '-60px' });
 
     return (
-        <section id="ecommerce" className="py-20 bg-[#0A0A0A]">
-            <div className="max-w-7xl mx-auto px-6">
+        <section id="ecommerce" style={{ background: '#F5F0E8', padding: 'clamp(48px, 6vw, 80px) clamp(20px, 6vw, 48px)' }}>
+            <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
                 <motion.div
                     ref={ref}
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative overflow-hidden rounded-2xl bg-surface border border-white/5 p-8 md:p-14"
+                    style={{ position: 'relative', overflow: 'hidden', borderRadius: '28px', background: '#FF3D57', padding: 'clamp(32px, 6vw, 72px)' }}
                 >
-                    {/* Background gradients */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/5 pointer-events-none" />
-                    <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/15 rounded-full blur-[80px] pointer-events-none" />
-                    <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-accent/10 rounded-full blur-[80px] pointer-events-none" />
+                    {/* Decorative shapes */}
+                    <div style={{ position: 'absolute', width: 'clamp(120px, 18vw, 256px)', height: 'clamp(120px, 18vw, 256px)', border: '2px solid rgba(255,255,255,0.12)', borderRadius: '48px', top: '-15%', right: '-5%', transform: 'rotate(12deg)', pointerEvents: 'none' }} />
+                    <div style={{ position: 'absolute', width: 'clamp(80px, 12vw, 160px)', height: 'clamp(80px, 12vw, 160px)', borderRadius: '28px', background: 'rgba(255,255,255,0.06)', bottom: '-10%', left: '30%', pointerEvents: 'none' }} />
 
-                    {/* Corner decoration */}
-                    <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-primary/40 rounded-tl" />
-                    <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-accent/40 rounded-br" />
-
-                    <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-                        {/* Left: Text */}
-                        <div className="flex flex-col gap-5 max-w-xl">
-                            {/* Badge */}
-                            <span className="inline-flex w-fit items-center gap-1.5 text-xs font-semibold tracking-[0.2em] uppercase text-accent border border-accent/30 bg-accent/10 px-3 py-1.5 rounded-full">
-                                <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+                    <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(24px, 4vw, 48px)' }}>
+                        {/* Left */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(14px, 2vw, 24px)', maxWidth: '600px', flex: '1 1 300px' }}>
+                            <span style={{ display: 'inline-flex', width: 'fit-content', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', background: '#FFD23F', color: '#1C1814', padding: '6px 16px', borderRadius: '999px' }}>
+                                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(28,24,20,0.35)' }} />
                                 Special Offer
                             </span>
 
-                            <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">
+                            <h2 style={{ fontSize: 'clamp(26px, 4.5vw, 52px)', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#fff', margin: 0 }}>
                                 eCommerce Development
                                 <br />
-                                <span className="gradient-text">starts at just Rs. 45000*</span>
+                                <span style={{ display: 'inline-block', background: '#FFD23F', color: '#1C1814', padding: '2px clamp(12px, 2vw, 24px)', borderRadius: 'clamp(10px, 1.5vw, 18px)', marginTop: '8px' }}>
+                                    starts at just Rs. 45000*
+                                </span>
                             </h2>
 
-                            <p className="text-white/55 text-base leading-relaxed font-light">
-                                Integrate payment gateways and skyrocket your sales. We get your store online
-                                in no-time with everything you need to succeed.
+                            <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 'clamp(14px, 1.3vw, 17px)', lineHeight: 1.7, fontWeight: 400 }}>
+                                Integrate payment gateways and skyrocket your sales. We get your store online in no time with everything you need to succeed.
                             </p>
 
-                            {/* Payment icons */}
                             <div>
-                                <p className="text-xs text-white/30 mb-3 font-medium tracking-wide uppercase">Supported Payment Gateways</p>
+                                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)', marginBottom: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Supported Payment Gateways</p>
                                 <PaymentIcons />
                             </div>
 
-                            <div className="mt-2">
+                            <div>
                                 <button
                                     id="ecommerce-cta-btn"
                                     onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-                                    className="btn-primary"
+                                    style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#FFD23F', color: '#1C1814', padding: '14px 28px', borderRadius: '14px', fontWeight: 700, fontSize: '14px', border: 'none', cursor: 'pointer', transition: 'transform 0.15s', fontFamily: 'inherit' }}
+                                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
+                                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                                 >
-                                    Let's Start
-                                    <ArrowRight size={16} />
+                                    Let's Start <ArrowRight size={16} />
                                 </button>
                             </div>
                         </div>
 
-                        {/* Right: Visual */}
-                        <div className="hidden lg:flex flex-col items-center justify-center gap-3">
-                            <div className="w-44 h-44 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center relative overflow-hidden">
-                                {/* Cart icon visual */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
-                                <div className="text-center relative z-10">
-                                    <div className="text-5xl mb-2">🛒</div>
-                                    <p className="text-xs text-white/60 font-semibold tracking-wide">Your Store</p>
-                                    <p className="text-xs text-white/30">Online, Fast</p>
+                        {/* Right visual — hidden on small screens */}
+                        <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                            <div style={{ width: 'clamp(120px, 14vw, 176px)', height: 'clamp(120px, 14vw, 176px)', borderRadius: '28px', background: 'rgba(255,255,255,0.14)', border: '2px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div style={{ fontSize: 'clamp(32px, 4vw, 48px)', marginBottom: '6px' }}>🛒</div>
+                                    <p style={{ fontSize: '12px', color: '#fff', fontWeight: 700, letterSpacing: '0.05em' }}>Your Store</p>
+                                    <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)' }}>Online, Fast</p>
                                 </div>
                             </div>
-                            <p className="text-xs text-white/30 text-center">*T&C apply. Pricing may vary based on requirements.</p>
+                            <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', textAlign: 'center' }}>*T&C apply. Pricing may vary.</p>
                         </div>
                     </div>
                 </motion.div>

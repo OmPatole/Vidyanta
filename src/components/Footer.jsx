@@ -1,5 +1,10 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Facebook, Instagram, MessageCircle, Mail, Phone } from 'lucide-react';
+import pageLogo from '/public/assets/PageLogo.png';
+
+const INK = '#1C1814';
+const MUTED = '#6B6057';
+const CREAM2 = '#EDE8DF';
 
 const footerLinks = {
     company: [
@@ -18,17 +23,15 @@ const footerLinks = {
     ],
 };
 
+const scroll = (href) => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+
 function FooterLink({ href, children }) {
     return (
-        <a
-            href={href}
-            onClick={(e) => {
-                e.preventDefault();
-                document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="text-sm text-white/40 hover:text-white transition-colors duration-300 flex items-center gap-1 group w-fit"
+        <a href={href} onClick={(e) => { e.preventDefault(); scroll(href); }}
+            style={{ fontSize: 'clamp(13px, 1vw, 14px)', color: MUTED, textDecoration: 'none', display: 'inline-block', transition: 'color 0.2s' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = INK}
+            onMouseLeave={(e) => e.currentTarget.style.color = MUTED}
         >
-            <span className="w-0 overflow-hidden group-hover:w-3 transition-all duration-300 text-primary">›</span>
             {children}
         </a>
     );
@@ -36,137 +39,90 @@ function FooterLink({ href, children }) {
 
 export default function Footer() {
     return (
-        <footer className="bg-[#0A0A0A] footer-border relative">
+        <footer style={{ background: '#F5F0E8', borderTop: '2px solid #5B4FE9' }}>
             {/* Pre-footer CTA */}
-            <div className="py-24 border-b border-white/5">
-                <div className="max-w-7xl mx-auto px-6 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="flex flex-col items-center gap-6"
-                    >
+            <div style={{ padding: 'clamp(56px, 8vw, 96px) clamp(20px, 6vw, 48px)', borderBottom: '1px solid rgba(28,24,20,0.1)' }}>
+                <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(16px, 2.5vw, 28px)' }}>
                         <span className="section-label">Start a Project</span>
-                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight max-w-3xl leading-tight">
+                        <h2 style={{ fontSize: 'clamp(28px, 5vw, 64px)', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: INK, margin: 0, maxWidth: '800px' }}>
                             So what's next?{' '}
-                            <span className="gradient-text">Let's Talk</span>
-                            <br />
-                            About Your Idea.
+                            <span style={{ background: '#5B4FE9', color: '#fff', padding: '2px clamp(12px, 2vw, 24px)', borderRadius: 'clamp(10px, 1.5vw, 18px)', display: 'inline-block' }}>Let's Talk</span>
+                            <br />About Your Idea.
                         </h2>
-                        <p className="text-white/45 max-w-md text-base font-light leading-relaxed">
+                        <p style={{ maxWidth: '480px', fontSize: 'clamp(14px, 1.3vw, 17px)', color: MUTED, lineHeight: 1.7 }}>
                             We're ready to bring your vision to life. Let's build something extraordinary together.
                         </p>
-                        <div className="flex flex-wrap items-center justify-center gap-4 mt-2">
-                            <button
-                                id="footer-cta-btn"
-                                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="btn-primary px-10 py-4 text-sm"
-                            >
-                                Let's Talk
-                                <ArrowRight size={16} />
+                        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+                            <button id="footer-cta-btn" onClick={() => scroll('#contact')} className="btn-primary" style={{ padding: 'clamp(12px,1.5vw,16px) clamp(28px,3vw,48px)' }}>
+                                Let's Talk <ArrowRight size={16} />
                             </button>
-                            <a
-                                href="mailto:hello@vidyantatech.com"
-                                className="btn-outline px-8 py-4 text-sm"
-                            >
-                                <Mail size={15} />
-                                Email Us
+                            <a href="mailto:hello@vidyantatech.com" className="btn-outline" style={{ padding: 'clamp(12px,1.5vw,16px) clamp(20px,2.5vw,32px)' }}>
+                                <Mail size={15} /> Email Us
                             </a>
                         </div>
                     </motion.div>
                 </div>
             </div>
 
-            {/* Footer Grid */}
-            <div className="py-14 max-w-7xl mx-auto px-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
-                    {/* Col 1: Brand */}
-                    <div className="flex flex-col gap-5">
-                        <a
-                            href="#home"
-                            onClick={(e) => { e.preventDefault(); document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' }); }}
-                            className="text-2xl font-black tracking-tight text-white hover:text-primary transition-colors"
-                        >
-                            vidyantatech<span className="text-primary">.</span>
+            {/* Grid */}
+            <div style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(40px, 6vw, 64px) clamp(20px, 6vw, 48px)' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: 'clamp(32px, 4vw, 48px)', marginBottom: 'clamp(32px, 4vw, 56px)' }}>
+
+                    {/* Brand */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', gridColumn: 'span 1' }}>
+                        <a href="#home" onClick={(e) => { e.preventDefault(); scroll('#home'); }} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                            <img src={pageLogo} alt="vidyantatech logo" style={{ height: '32px', width: 'auto', objectFit: 'contain' }} />
                         </a>
-                        <p className="text-sm text-white/40 leading-relaxed font-light">
-                            A full-service Digital Agency focused on one ultimate goal: Your Business's Success.
-                        </p>
-                        <div className="flex items-center gap-2 text-sm text-white/40">
-                            <Phone size={14} className="text-primary flex-shrink-0" />
-                            +91 98765 43210
+                        <p style={{ fontSize: 'clamp(12px, 1vw, 13px)', color: MUTED, lineHeight: 1.7 }}>A full-service Digital Agency focused on one ultimate goal: Your Business's Success.</p>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: MUTED }}>
+                            <Phone size={13} color="#5B4FE9" style={{ flexShrink: 0 }} /> +91 98765 43210
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-white/40">
-                            <Mail size={14} className="text-primary flex-shrink-0" />
-                            hello@vidyantatech.com
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: MUTED }}>
+                            <Mail size={13} color="#5B4FE9" style={{ flexShrink: 0 }} /> hello@vidyantatech.com
                         </div>
                     </div>
 
-                    {/* Col 2: Company */}
-                    <div className="flex flex-col gap-4">
-                        <h4 className="text-sm font-semibold text-white tracking-wide">Company</h4>
-                        {footerLinks.company.map((link) => (
-                            <FooterLink key={link.name} href={link.href}>{link.name}</FooterLink>
+                    {/* Company */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <h4 style={{ fontSize: '13px', fontWeight: 700, color: INK, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '4px' }}>Company</h4>
+                        {footerLinks.company.map((l) => <FooterLink key={l.name} href={l.href}>{l.name}</FooterLink>)}
+                    </div>
+
+                    {/* Services */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <h4 style={{ fontSize: '13px', fontWeight: 700, color: INK, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '4px' }}>Services</h4>
+                        {footerLinks.services.map((l) => <FooterLink key={l.name} href={l.href}>{l.name}</FooterLink>)}
+                    </div>
+
+                    {/* Social */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        <h4 style={{ fontSize: '13px', fontWeight: 700, color: INK, letterSpacing: '0.05em', textTransform: 'uppercase' }}>Connect With Us</h4>
+                        {[
+                            { id: 'social-facebook', Icon: Facebook, color: '#1877F2', label: 'Facebook' },
+                            { id: 'social-instagram', Icon: Instagram, color: '#E1306C', label: 'Instagram' },
+                            { id: 'social-whatsapp', Icon: MessageCircle, color: '#25D366', label: 'WhatsApp', href: 'https://wa.me/919876543210', external: true },
+                        ].map(({ id, Icon, color, label, href, external }) => (
+                            <a key={id} id={id} href={href || '#'} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}
+                                style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: MUTED, textDecoration: 'none', transition: 'color 0.2s' }}
+                                onMouseEnter={(e) => e.currentTarget.style.color = INK}
+                                onMouseLeave={(e) => e.currentTarget.style.color = MUTED}
+                            >
+                                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: CREAM2, border: `1.5px solid ${color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                    <Icon size={15} color={color} />
+                                </div>
+                                {label}
+                            </a>
                         ))}
-                    </div>
-
-                    {/* Col 3: Services */}
-                    <div className="flex flex-col gap-4">
-                        <h4 className="text-sm font-semibold text-white tracking-wide">Services</h4>
-                        {footerLinks.services.map((link) => (
-                            <FooterLink key={link.name} href={link.href}>{link.name}</FooterLink>
-                        ))}
-                    </div>
-
-                    {/* Col 4: Social */}
-                    <div className="flex flex-col gap-5">
-                        <h4 className="text-sm font-semibold text-white tracking-wide">Connect With Us</h4>
-                        <div className="flex flex-col gap-3">
-                            <a
-                                href="#"
-                                id="social-facebook"
-                                className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-colors group"
-                            >
-                                <div className="w-9 h-9 rounded-md bg-[#1877F2]/10 border border-[#1877F2]/20 flex items-center justify-center group-hover:bg-[#1877F2]/20 transition-colors">
-                                    <Facebook size={15} className="text-[#1877F2]" />
-                                </div>
-                                Facebook
-                            </a>
-                            <a
-                                href="#"
-                                id="social-instagram"
-                                className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-colors group"
-                            >
-                                <div className="w-9 h-9 rounded-md bg-[#E1306C]/10 border border-[#E1306C]/20 flex items-center justify-center group-hover:bg-[#E1306C]/20 transition-colors">
-                                    <Instagram size={15} className="text-[#E1306C]" />
-                                </div>
-                                Instagram
-                            </a>
-                            <a
-                                href="https://wa.me/919876543210"
-                                id="social-whatsapp"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-colors group"
-                            >
-                                <div className="w-9 h-9 rounded-md bg-[#25D366]/10 border border-[#25D366]/20 flex items-center justify-center group-hover:bg-[#25D366]/20 transition-colors">
-                                    <MessageCircle size={15} className="text-[#25D366]" />
-                                </div>
-                                WhatsApp
-                            </a>
-                        </div>
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5">
-                    <p className="text-xs text-white/25">
-                        © 2026 vidyantatech. Made in India 🇮🇳
-                    </p>
-                    <div className="flex items-center gap-5 text-xs text-white/25">
-                        <a href="#" className="hover:text-white/50 transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-white/50 transition-colors">Terms of Service</a>
+                {/* Bottom */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px', paddingTop: 'clamp(16px, 2vw, 24px)', borderTop: '1px solid rgba(28,24,20,0.1)' }}>
+                    <p style={{ fontSize: '12px', color: 'rgba(28,24,20,0.35)' }}>© 2026 vidyantatech. Made in India 🇮🇳</p>
+                    <div style={{ display: 'flex', gap: '20px', fontSize: '12px', color: 'rgba(28,24,20,0.35)' }}>
+                        <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</a>
+                        <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</a>
                     </div>
                 </div>
             </div>

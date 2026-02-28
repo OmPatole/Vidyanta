@@ -7,14 +7,18 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter', 'system-ui', 'sans-serif'],
+                sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+                mono: ['Space Mono', 'monospace'],
             },
             colors: {
-                primary: '#2563EB',
-                'primary-light': '#3B82F6',
-                accent: '#00E5FF',
-                surface: '#171717',
-                'surface-2': '#1F1F1F',
+                primary: '#5B4FE9',
+                'primary-light': '#7B72F2',
+                accent: '#FF3D57',
+                'accent-green': '#00C896',
+                'accent-yellow': '#FFD23F',
+                surface: '#EDE8DF',
+                'surface-2': '#E4DDD3',
+                bg: '#F5F0E8',
             },
             animation: {
                 'marquee': 'marquee 30s linear infinite',

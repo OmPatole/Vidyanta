@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import pageLogo from '/public/assets/PageLogo.png';
 
 const navLinks = [
     { name: 'Home', href: '#home' },
@@ -28,18 +29,22 @@ export default function Navbar() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'nav-glass' : 'bg-transparent'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'nav-glass' : ''
                 }`}
+            style={!scrolled ? { background: 'transparent' } : {}}
         >
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
                 {/* Logo */}
                 <a
                     href="#home"
                     onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
-                    className="text-xl font-black tracking-tight text-white hover:text-primary transition-colors duration-300"
+                    style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
                 >
-                    vidyantatech
-                    <span className="text-primary">.</span>
+                    <img
+                        src={pageLogo}
+                        alt="vidyantatech logo"
+                        style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+                    />
                 </a>
 
                 {/* Desktop Nav */}
@@ -49,10 +54,14 @@ export default function Navbar() {
                             key={link.name}
                             href={link.href}
                             onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                            className="text-sm text-white/70 hover:text-white font-medium transition-colors duration-300 relative group"
+                            className="text-sm font-medium transition-colors duration-300 relative group"
+                            style={{ color: 'rgba(28,24,20,0.65)' }}
                         >
                             {link.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+                            <span
+                                className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
+                                style={{ background: '#FF3D57' }}
+                            />
                         </a>
                     ))}
                 </nav>
@@ -67,10 +76,11 @@ export default function Navbar() {
                     Get In Touch
                 </a>
 
-                {/* Mobile Menu Toggle */}
+                {/* Mobile toggle */}
                 <button
                     id="mobile-menu-toggle"
-                    className="md:hidden text-white/80 hover:text-white transition-colors"
+                    className="md:hidden transition-colors"
+                    style={{ color: 'rgba(28,24,20,0.7)' }}
                     onClick={() => setMobileOpen(!mobileOpen)}
                     aria-label="Toggle menu"
                 >
@@ -86,7 +96,8 @@ export default function Navbar() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="md:hidden nav-glass border-t border-white/5 overflow-hidden"
+                        className="md:hidden nav-glass overflow-hidden"
+                        style={{ borderTop: '1px solid rgba(28,24,20,0.08)' }}
                     >
                         <div className="px-6 py-4 flex flex-col gap-4">
                             {navLinks.map((link) => (
@@ -94,7 +105,8 @@ export default function Navbar() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                                    className="text-sm text-white/70 hover:text-white font-medium transition-colors py-1"
+                                    className="text-sm font-medium transition-colors py-1"
+                                    style={{ color: 'rgba(28,24,20,0.65)' }}
                                 >
                                     {link.name}
                                 </a>
