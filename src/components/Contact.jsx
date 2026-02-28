@@ -82,7 +82,7 @@ export default function Contact() {
 
                         {[
                             { icon: Mail, label: 'Email', value: 'hello@vidyantatech.com' },
-                            { icon: Phone, label: 'Phone', value: '+91 98765 43210' },
+                            { icon: Phone, label: 'Phone', value: '+91 797212 3806' },
                             { icon: MapPin, label: 'Location', value: 'India — Serving Worldwide' },
                         ].map(({ icon: Icon, label, value }) => (
                             <div key={label} className="flex items-start gap-4">
