@@ -71,7 +71,7 @@ export default function Footer() {
                             <motion.button id="footer-cta-btn" onClick={() => scroll('#contact')} className="btn-primary" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} style={{ padding: 'clamp(12px,1.5vw,16px) clamp(28px,3vw,48px)' }}>
                                 Let's Talk <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}><ArrowRight size={16} /></motion.span>
                             </motion.button>
-                            <motion.a href="mailto:hello@vidyantatech.com" className="btn-outline" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} style={{ padding: 'clamp(12px,1.5vw,16px) clamp(20px,2.5vw,32px)', cursor: 'pointer' }}>
+                            <motion.a href="mailto:Vidyantatech@proton.me" className="btn-outline" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} style={{ padding: 'clamp(12px,1.5vw,16px) clamp(20px,2.5vw,32px)', cursor: 'pointer' }}>
                                 <Mail size={15} /> Email Us
                             </motion.a>
                         </div>
@@ -90,10 +90,10 @@ export default function Footer() {
                         </motion.a>
                         <p style={{ fontSize: 'clamp(12px, 1vw, 13px)', color: MUTED, lineHeight: 1.7 }}>A full-service Digital Agency focused on one ultimate goal: Your Business's Success.</p>
                         <motion.div whileHover={{ x: 4 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: MUTED, cursor: 'default' }}>
-                            <Phone size={13} color="#5B4FE9" style={{ flexShrink: 0 }} /> +91 79 7212 3806
+                            <Phone size={13} color="#5B4FE9" style={{ flexShrink: 0 }} /> +91 84465 76377
                         </motion.div>
                         <motion.div whileHover={{ x: 4 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: MUTED, cursor: 'default' }}>
-                            <Mail size={13} color="#5B4FE9" style={{ flexShrink: 0 }} /> hello@vidyantatech.com
+                            <Mail size={13} color="#5B4FE9" style={{ flexShrink: 0 }} /> Vidyantatech@proton.me
                         </motion.div>
                     </div>
 
@@ -115,7 +115,7 @@ export default function Footer() {
                         {[
                             { id: 'social-facebook', Icon: Facebook, color: '#1877F2', label: 'Facebook' },
                             { id: 'social-instagram', Icon: Instagram, color: '#E1306C', label: 'Instagram' },
-                            { id: 'social-whatsapp', Icon: MessageCircle, color: '#25D366', label: 'WhatsApp', href: 'https://wa.me/917972123806', external: true },
+                            { id: 'social-whatsapp', Icon: MessageCircle, color: '#25D366', label: 'WhatsApp', href: 'https://wa.me/918446576377', external: true },
                         ].map(({ id, Icon, color, label, href, external }, i) => (
                             <motion.a
                                 key={id} id={id} href={href || '#'} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}

@@ -14,6 +14,7 @@ const navLinks = [
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const MOBILE_HEADER_OFFSET = 72;
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -21,17 +22,50 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setMobileOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const scrollToHref = (href) => {
+        if (href === '#home') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        const element = document.querySelector(href);
+        if (!element) {
+            window.location.hash = href;
+            return;
+        }
+
+        const targetTop = element.getBoundingClientRect().top + window.pageYOffset - MOBILE_HEADER_OFFSET;
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+    };
+
     const handleNavClick = (href) => {
+        const shouldDelayScroll = mobileOpen;
         setMobileOpen(false);
-        const el = document.querySelector(href);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+
+        if (shouldDelayScroll) {
+            window.setTimeout(() => scrollToHref(href), 220);
+            return;
+        }
+
+        requestAnimationFrame(() => scrollToHref(href));
     };
 
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'nav-glass' : ''
                 }`}
-            style={!scrolled ? { background: 'transparent' } : {}}
+            style={{ ...(!scrolled ? { background: 'transparent' } : {}), zIndex: 1000 }}
         >
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
                 {/* Logo */}
@@ -79,6 +113,7 @@ export default function Navbar() {
                 {/* Mobile toggle */}
                 <button
                     id="mobile-menu-toggle"
+                    type="button"
                     className="md:hidden transition-colors"
                     style={{ color: 'rgba(28,24,20,0.7)' }}
                     onClick={() => setMobileOpen(!mobileOpen)}
@@ -97,7 +132,7 @@ export default function Navbar() {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
                         className="md:hidden nav-glass overflow-hidden"
-                        style={{ borderTop: '1px solid rgba(28,24,20,0.08)' }}
+                        style={{ borderTop: '1px solid rgba(28,24,20,0.08)', position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 1001 }}
                     >
                         <div className="px-6 py-4 flex flex-col gap-4">
                             {navLinks.map((link) => (

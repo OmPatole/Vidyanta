@@ -31,9 +31,30 @@ export default function Contact() {
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: '', message: '' });
     const [submitted, setSubmitted] = useState(false);
     const [focusedField, setFocusedField] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
-    const handleSubmit = (e) => { e.preventDefault(); setSubmitted(true); };
+    const handleSubmit = async (e) => { 
+        e.preventDefault(); 
+        setIsSubmitting(true);
+        try {
+            const response = await fetch('http://localhost:5000/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            if (response.ok) {
+                setSubmitted(true);
+            } else {
+                alert('There was a problem sending the message. Please try again.');
+            }
+        } catch (error) {
+            console.error('Submission failed', error);
+            alert('Could not reach the server. Please ensure the backend is running.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     const services = [
         'Website Development', 'Ecommerce Development', 'Website Migration',
@@ -81,8 +102,8 @@ export default function Contact() {
                         </motion.div>
 
                         {[
-                            { icon: Mail, label: 'Email', value: 'hello@vidyantatech.com' },
-                            { icon: Phone, label: 'Phone', value: '+91 79 7212 3806' },
+                            { icon: Mail, label: 'Email', value: 'Vidyantatech@proton.me' },
+                            { icon: Phone, label: 'Phone', value: '+91 84465 76377' },
                             { icon: MapPin, label: 'Location', value: 'India — Serving Worldwide' },
                         ].map(({ icon: Icon, label, value }) => (
                             <motion.div
@@ -156,7 +177,7 @@ export default function Contact() {
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 'clamp(12px, 2vw, 20px)' }}>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                                         <label htmlFor="phone" style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: focusedField === 'phone' ? '#5B4FE9' : MUTED, transition: 'color 0.2s' }}>Phone Number</label>
-                                        <input id="phone" name="phone" type="tel" placeholder="+91 79 7212 3806" value={formData.phone} onChange={handleChange} onFocus={() => setFocusedField('phone')} onBlur={() => setFocusedField(null)} style={{ ...inputStyle, ...(focusedField === 'phone' ? inputFocusStyle : {}) }} />
+                                        <input id="phone" name="phone" type="tel" placeholder="+91 84465 76377" value={formData.phone} onChange={handleChange} onFocus={() => setFocusedField('phone')} onBlur={() => setFocusedField(null)} style={{ ...inputStyle, ...(focusedField === 'phone' ? inputFocusStyle : {}) }} />
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                                         <label htmlFor="service" style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: focusedField === 'service' ? '#5B4FE9' : MUTED, transition: 'color 0.2s' }}>Service Needed</label>
@@ -176,9 +197,10 @@ export default function Contact() {
                                     type="submit"
                                     id="contact-submit-btn"
                                     className="btn-primary"
-                                    style={{ width: '100%', justifyContent: 'center' }}
+                                    disabled={isSubmitting}
+                                    style={{ width: '100%', justifyContent: 'center', opacity: isSubmitting ? 0.7 : 1 }}
                                 >
-                                    Send Message <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}><Send size={15} /></motion.span>
+                                    {isSubmitting ? 'Sending...' : 'Send Message'} {!isSubmitting && <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}><Send size={15} /></motion.span>}
                                 </motion.button>
                             </form>
                         )}
