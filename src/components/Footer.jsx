@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Facebook, Instagram, MessageCircle, Mail, Phone } from 'lucide-react';
+import { ArrowRight, AtSign, Facebook, Instagram, Linkedin, Mail, Phone, Twitter } from 'lucide-react';
 import pageLogo from '/public/assets/PageLogo.png';
 
 const INK = '#1C1814';
@@ -113,9 +113,11 @@ export default function Footer() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                         <h4 style={{ fontSize: '13px', fontWeight: 700, color: INK, letterSpacing: '0.05em', textTransform: 'uppercase' }}>Connect With Us</h4>
                         {[
-                            { id: 'social-facebook', Icon: Facebook, color: '#1877F2', label: 'Facebook' },
-                            { id: 'social-instagram', Icon: Instagram, color: '#E1306C', label: 'Instagram' },
-                            { id: 'social-whatsapp', Icon: MessageCircle, color: '#25D366', label: 'WhatsApp', href: 'https://wa.me/918446576377', external: true },
+                            { id: 'social-instagram', Icon: Instagram, color: '#E1306C', label: 'Instagram', href: 'https://www.instagram.com/vidyantatech?igsh=MTdndW1lZWtlYmJhMg==', external: true },
+                            { id: 'social-linkedin', Icon: Linkedin, color: '#0A66C2', label: 'LinkedIn', href: 'https://www.linkedin.com/company/vidyanta-tech/', external: true },
+                            { id: 'social-x', Icon: Twitter, color: '#111111', label: 'X (Twitter)', href: 'https://x.com/VidyantaTech', external: true },
+                            { id: 'social-threads', Icon: AtSign, color: '#111111', label: 'Threads', href: 'https://www.threads.com/@vidyantatech', external: true },
+                            { id: 'social-facebook', Icon: Facebook, color: '#1877F2', label: 'Facebook', href: 'https://www.facebook.com/share/178GAdKJSb/', external: true },
                         ].map(({ id, Icon, color, label, href, external }, i) => (
                             <motion.a
                                 key={id} id={id} href={href || '#'} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}
