@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import pageLogo from '/public/assets/PageLogo.png';
+import Logo from '/public/assets/Logo.png';
 
 // ─── Minimal Loader ───────────────────────────────────────────────────────────
 // Three elements only: logo · rotating arc · progress bar
@@ -59,7 +59,7 @@ export default function Loader({ onComplete }) {
                                 borderTopColor: '#5B4FE9',
                             }}
                         />
-                        <img src={pageLogo} alt="Vidyantatech" style={{ height: '34px', width: 'auto' }} />
+                        <img src={Logo} alt="Vidyantatech" style={{ height: '34px', width: 'auto' }} />
                     </div>
 
                     {/* Progress bar */}
