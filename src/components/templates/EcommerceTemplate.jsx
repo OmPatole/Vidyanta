@@ -197,7 +197,7 @@ export default function EcommerceTemplate() {
 
             {/* Flash Sale Banner */}
             <section style={{ maxWidth: 1140, margin: '0 auto', padding: '0 24px 56px' }}>
-                <div style={{ borderRadius: 16, background: `linear-gradient(120deg, ${dark} 0%, #292524 100%)`, padding: '32px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap', gap: 24 }}>
+                <div style={{ borderRadius: 16, background: `linear-gradient(120deg, ${dark} 0%, #292524 100%)`, padding: '32px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24 }}>
                     <div>
                         <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: orange, margin: '0 0 8px' }}>Limited Time Deal</p>
                         <h3 style={{ fontSize: 28, fontWeight: 900, color: '#fff', margin: '0 0 8px' }}>Up to <span style={{ color: orange }}>50% off</span> on Tech</h3>
