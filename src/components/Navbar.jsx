@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, LayoutTemplate, CreditCard } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
-import pageLogo from '/public/assets/PageLogo.png';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+const pageLogo = `${import.meta.env.BASE_URL}assets/PageLogo.png`;
 
 const navLinks = [
     { name: 'Home', href: '#home' },
@@ -80,12 +80,14 @@ export default function Navbar() {
         window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
     };
 
+    const location = useLocation();
+
     const handleNavClick = (href) => {
         const shouldDelayScroll = mobileOpen;
         setMobileOpen(false);
 
         // If we're not on the home page, navigate home first then scroll
-        if (window.location.pathname !== '/') {
+        if (location.pathname !== '/') {
             navigate('/');
             window.setTimeout(() => scrollToHref(href), 350);
             return;

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import pageLogo from '/public/assets/PageLogo.png';
+const pageLogo = `${import.meta.env.BASE_URL}assets/PageLogo.png`;
 
 const INK = '#1C1814';
 const MUTED = '#6B6057';

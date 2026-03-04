@@ -11,7 +11,7 @@ export default function TemplateViewer({ templateName, children }) {
         return <>{children}</>;
     }
 
-    const iframeSrc = `${location.pathname}?raw=true`;
+    const iframeSrc = `${import.meta.env.BASE_URL}${location.pathname.replace(/^\//, '')}?raw=true`;
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: '#e5e5e5', overflow: 'hidden' }}>
