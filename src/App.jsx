@@ -1,5 +1,11 @@
-import { useState, useCallback } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useState, useCallback, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
+function ScrollToTop() {
+    const { pathname } = useLocation();
+    useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+    return null;
+}
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -68,6 +74,8 @@ export default function App() {
                 {loading && <Loader onComplete={handleComplete} />}
             </AnimatePresence>
             {!loading && (
+                <>
+                <ScrollToTop />
                 <Routes>
                     <Route path="/"          element={<HomePage />} />
                     <Route path="/about"     element={<AboutPage />} />
@@ -89,6 +97,7 @@ export default function App() {
                     <Route path="/templates/education"  element={<TemplatePages.education />} />
                     <Route path="*"          element={<NotFound />} />
                 </Routes>
+                </>
             )}
         </>
     );
